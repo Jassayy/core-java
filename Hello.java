@@ -13,14 +13,24 @@ class Hello{
 
        }
        public static void main(String[] arg){
-              //creating object 
-              Hello obj1 = new Hello();
-              obj1.showVar();
-              Hello obj2 = new Hello();
-              obj2.instVar = 100; //obj1 inst variable still remains 10 but for obj 2 it becomes 100
-              obj2.showVar();
-              Hello.s = "This is static and will be shared among all objects";
-              obj1.showVar();
-              obj2.showVar();
+             int a = 5;
+             int b = 10;
+             System.out.println(a<b); //prints true or false
+
+             //if else statements remain the same
+             //switch statements
+             int day = 9;
+             switch (day) {
+              case 0:
+                    System.out.println(0); 
+                     break;
+              case 3:
+                     System.out.println("Hello bro");
+                     break;
+             
+              default:
+                     System.out.println("ew");
+                     break;
+             }
        }
 }
