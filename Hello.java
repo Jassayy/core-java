@@ -29,11 +29,17 @@ class Student {
 }
 
 public class Hello {
+       public static int[] m1() {
+              // this method returns an array
+              return new int[] { 1, 2, 3 };
+       }
+
        public static void main(String[] arg) {
               int[] arr = new int[4]; // when we dont have initial values for the array we initialise like this
                                       // (allocating memory of 5 ints) all indexes are 0 initially
+              System.out.println(arr);
               int[] arr1 = { 1, 2, 3, 4, 5, 6, 7 }; // we can initialise like this as well
-
+              System.out.println(arr1);
               // declaring array of objects
               Student[] arr2 = new Student[5]; // array of student of object with size 5
               arr2[0] = new Student(1, "Jas");
@@ -42,18 +48,31 @@ public class Hello {
               arr2[3] = new Student(3, "null");
               arr2[4] = new Student(3, "null");
 
-
               for (int i = 0; i < arr2.length; i++) {
                      System.out.println(arr2[i] + " "); // we are printing arr2 -> contains obj
-                     // Student@2a139a55  -> this is one student object and the number is object hash
+                     // Student@2a139a55 -> this is one student object and the number is object hash
                      // Student@15db9742
                      // null
                      // null
                      // null
 
-                     System.out.println(arr2[i].name + arr2[i].age); //this will print the data inside obj
+                     System.out.println(arr2[i].name + arr2[i].age); // this will print the data inside obj
 
+              }
+              int[] nums = m1();
+              for (int i = 0; i < nums.length; i++) {
+                     System.out.println(nums[i] + " ");
+              }
 
+              //2d arrays
+              int[][] darr = {{1,2,3} , {4,5,6}};
+              //access same as cpp
+              int n = darr.length;
+              int m = darr[0].length;
+              for(int i = 0 ; i < n ; i++){
+                     for(int j = 0 ; j < m ; j++){
+                            System.out.println(darr[i][j] + " ");
+                     }
               }
        }
 }
