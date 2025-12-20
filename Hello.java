@@ -1,24 +1,23 @@
-//methods
-class Computer {
-       public void playMusic() {
-              System.out.println("Music playing");
+//method overloading
+
+class Calculator {
+       public int addTwoNum(int a, int b) {
+              return a + b;
        }
 
-       public String getPen(int cost) {
-              if (cost > 10) {
-
-                     return "pen";
-              } else {
-                     return "Chiggi boy";
-              }
+       public int addTwoNum(int a, int b, int c) {
+              return a + b + c;
        }
+
 }
 
 public class Hello {
        public static void main(String[] arg) {
-              Computer obj = new Computer();
-              String s = obj.getPen(15);
-              System.out.println(s);
-              obj.playMusic();
+              Calculator obj = new Calculator();
+              int res = obj.addTwoNum(1, 2);
+              System.out.println(res);
+              int resu = obj.addTwoNum(1, 2, 3);
+              System.out.println(resu);
+
        }
 }
