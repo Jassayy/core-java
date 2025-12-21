@@ -1,35 +1,35 @@
-//strings
+//string buffer and string builder
 public class Main {
        public static void main(String[] ar){
-               String name = new String("Jas and Riya");
-              //  String s = "Jas and Riya"; //this is valid as well
-               System.out.println(name.charAt(0));
-               System.out.println(name.substring(8));
-               System.out.println(name);
-               System.out.println(name.hashCode());
-               System.out.println("Hello" + name);//concatenation
+              StringBuffer sb = new StringBuffer("Jas"); //mutable and thread safe
+              //instead of creating new objects
+              //modifications are made in the same object
+              //string buffer has a predefined size
+              System.out.println(sb.capacity()); //16 chars when string buffer is empty
+              //if we do string buffer("jas") -> capacity extends by 3 char i.e 19 
+              //that means we always have extra 16 char space
+              System.out.println(sb.length());
+              //we can append any data we want
+              sb.append(" Gandhi");
+              System.out.println(sb);
+              System.out.println(sb.capacity());//still 19
 
-               //mutable and immutable strings
-              String n = "Jas";
-              n = n+" Gandhi"; //this works
-              //but the original n is not getting altered here
-              //in heap -> string constant pool exists
-              //checks if the string is already there in heap or no
-              //if it already exists
-              //no more object is created
-              //memory reference for all strings remain the same
-              //for eg-> String s1 = "jas";
-              //String s2 = "jas";
-              //both these strings are same and hence only 1 obj is created but both point to the same memory location in heap
+              //we can convert string buffer to string using to_string
+              String s = sb.toString();
+              System.out.println(s);
+
+              //many methods exist in string buffer
+              sb.insert(0 , "java");
+              System.out.println(sb);
               
-              System.out.println("hello " + n);
-              //but when we did name + "Gandhi"
-              //it checked in scp if it exists
-              //it doesnt exist
-              //so new object is created with new mem location
-              //and the reference to it is updated
-              //i.e name points to another memory location now in heap which has Jas Gandhi
-              //prev location in heap which had only Jas is kept for garbage collection
+              sb.setLength(30);
+              System.out.println(sb.length()); //30
+              System.out.println(sb.capacity()); //40
+              //increase capacity using this formula
+              //new capacity = (old capacity * 2) + 2
 
+
+              //string builder and string buffer are both same in working but has only one different
+              //string buffer is thread safe and string builder is not thread safe
        }
 }
