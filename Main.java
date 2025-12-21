@@ -6,9 +6,11 @@ class Human{
        //we use private keyword
        private String hobbies;
 
-       public void setHobbies(String h){
+       public void setHobbies(String hobbies){
               //this is setter method
-              hobbies = h;
+              this.hobbies = hobbies; //-> we use this keyword to access the variable inside the class as we are using same name in parameter
+              //by this we mean we are talking about a hobbies var inside the same class 
+              //this keyword refers to the current object
        }
        
 
