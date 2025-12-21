@@ -1,24 +1,35 @@
 //static variables in java and static methods
+
+//->static block is called first and then constructor is called whenever an object is created and static block will be called only once but constructor will be called everytime an obj is created
+
+//in JVM theres exists a place known as class loader which loads all the classes in the beginning and so static block is called first and the constructors are called when object is created
+//when no object exists...static block is not called
+//but what if we want to load a class without creating an obj
+//for this we use "Class" class in java
 public class Main {
-       public static void main(String[] ar) {
-              Mobile obj1 = new Mobile();
-              obj1.brand = "apple";
-              obj1.price = 1500;
+       public static void main(String[] ar) throws ClassNotFoundException {
+              // Mobile obj1 = new Mobile();
+              // obj1.brand = "apple";
+              // obj1.price = 1500;
               // obj1.name = "Phone"; //affects obj2 as well
               // best practice to use static is like this
-              Mobile.name = "Phone"; // dont use obj1.name and so on
-              obj1.show();
+              // Mobile.name = "Phone"; // dont use obj1.name and so on
+              // obj1.show();
 
-              Mobile obj2 = new Mobile();
-              obj2.brand = "Samsung";
-              obj2.price = 1500;
+              // Mobile obj2 = new Mobile();
+              // obj2.brand = "Samsung";
+              // obj2.price = 1500;
 
-              obj2.show();
+              // obj2.show();
 
-              Mobile.show1(); //we can do this shared by all objects
-              Mobile.show2(obj2); //here we can print brand as we are passing for which obj we need brand
+              // Mobile.show1(); //we can do this shared by all objects
+              // Mobile.show2(obj2); //here we can print brand as we are passing for which obj we need brand
 
-              Mobile obj3 = new Mobile();
+              // Mobile obj3 = new Mobile();
+
+              //to load class without creating an obj we use "Class" class
+              Class.forName("Mobile"); //this throws an exception so we have throws ClassNotFoundException at the beginning of main method
+              //therefore static method will be called once without creating the object
        }
 }
 
