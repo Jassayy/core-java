@@ -1,123 +1,66 @@
-//OOPS in Java
+//super keyword
+//by default each constructor has a method know as super() even if we dont initialise it or see it
+
+//super() always calls the contructor of the parent class if present first and then child constructor is called
+//this super class will call the default constructor and not the parameterized constructor and hence we can see
+//In A and then in B
+//and not In int A and int B
+//INT b IS CALLED WHEN WE INITIALIZE IBJ WITH PARAMETERIZED CONSTRUCTOR
+//but if we want the parameterized super constructor called
+//just pass the parameter in super();
 public class Main {
-       // ->objects
-       public static void main(String[] a) {
-              Human h = new Human();
-              System.out.println(h.getName()); // comes ""
-              System.out.println(h.getAge()); // comes 0
 
-              h.setAge(30);
-              h.setName("Jas");
+       public static void main(String[] a){
+              B b = new B(5); 
+              // B obj = new B();
+              //we are creating an obj with B
+              //if an obj is created with B but B extends A
+              //Will A constructor be called? Yes
+              //Super class which is also known as the parent or base class constructor is also called when any child class obj is created
 
-              System.out.println(h.getName());
-              System.out.println(h.getAge());
+              //IN BOTH THE ABV CASES 
+              //Constructor for A is called and B is called after A depending on the parameters passed in constructor  
 
-              // abstraction
-              Vehicle v = new Car(); // object cannot be instantiated from abstract classes and they are incomplete
-                                     // in nature but its instantiated via car()
-              // which has properties of vehicle and can use its methods
-              v.accelerate();
-              v.brake();
-              v.Start(); //this is done via inheritance
-              //start method is inside vehicle and is accessed via car class with the help of inheritance
-
-              //Polymorphism
-              Calculator c = new Calculator();
-              c.add(1, 2);
-              System.out.println(c.res);
-              c.add(2, 5, 6);
-              System.out.println(c.res); //method name is same but depending on what parameters we send
-              //respective of that the method is called
-              //this is know as method overloading
-              //Also, known as compile-time polymorphism
-
-              //method overriding
-              //Also, known as run-time polymorphism
-              v.Start(); //child start called
-              //method with same name exists inside the child
-              //and hence instead of calling parent class method 
-              //method is over ridden with childs method with same name
-       }
-
-}
-
-// ENCAPSULATION
-// WRAPPING DATA AND METHODS INSIDE A SINGLE UNIT I.E A CLASS
-
-class Human {
-       int age;
-       String name;
-
-       Human() {
-              // constructor
-              System.out.println("Inside constructor");
-              age = 0;
-              name = "";
-
-       }
-
-       // setters
-       public void setAge(int age) {
-              this.age = age;
-       }
-
-       public void setName(String name) {
-              this.name = name;
-       }
-
-       // getters
-       public String getName() {
-              return name;
-       }
-
-       public int getAge() {
-              return age;
-       }
-
-}
-
-// ABSTRACTION
-abstract class Vehicle {
-       abstract void accelerate();
-
-       abstract void brake(); // these two methods show what to do
-       // but dont show how to do
-       public void Start(){
-              System.out.println("Vehicle started");
-              System.out.println("Parent start called");
        }
 }
 
-class Car extends Vehicle {  //inheritance is also done here
-       @Override // not required but recommended for compile time safety
-       void accelerate() {
-              System.out.println("press accelerator");
+class A extends Object{ //every class extends to Object
+       public A(){
+              super(); //present always 
+              //A is a super class to B
+              //why does it have super as well?
+              //every class in java extends to Object
+              //the constructor for Object class is called whenever theres no parent class to the super class
+
+              System.out.println("In A");
        }
 
-       @Override
-       void brake() {
-              System.out.println("Brakes applied");
-       }
+       public A(int n){
+              super();
 
-       public void Start(){
-              System.out.println("Child start called");
+              System.out.println("In int A");
        }
+       
 }
 
-//POLYMORPHISM
-class Calculator{
-       int res;
-       public int add(int a , int b){
-              res =  a + b;
-              return res;
+class B extends A{
+       public B(){
+              super();
+
+              System.out.println("In B");
        }
 
-       public int add(int a , int b , int c){
-              res =  a + b + c;
-              return res;
-       }
+       public B(int n){
+              // super(n); //this will call parameterized constructor in A
 
-       public int showRes(){
-              return res;
+              this(); //this will call the constructor for the same class and not the super class
+              //this will call B() -> B will call super()
+              //  -> A constructor will get called
+              //output flow would be
+              //in A
+              //in B
+              //in int B
+
+              System.out.println("in int B");
        }
 }
