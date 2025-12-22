@@ -1,55 +1,47 @@
-//dynamic method dispatch
-
-class A{
-       public void show(){
-              System.out.println("In A");
-       }
-}
-
-class B extends A{
-       public void show(){
-              System.out.println("In B");
-       }
-}
-
+//final keyword -> can be used with variable, methods , classes
 
 public class Main {
 
        public static void main(String[] args){
-              A obj = new A(); 
+              int n = 9;
+              n = 10; //we can change the value of n
+              System.out.println(n);
+
+              final int m = 69;
+              // m = 67; //this we cannot do as final keyword is used
+              System.out.println(m);
+
+              A obj = new A();
               obj.show();
-              // creates a reference "obj" of type B class but can we create a reference obj of type A?
-              //yes
-              obj = new B(); //-> we can do this
-              obj.show(); //gives in A
-
-              //dynamic method dispatch means
-              //irrespective of type of reference created whether it is A obj and B obj
-              //the method called (which is show() in this case) will depend on the object which is used to create that reference
-              //on line 19 -> object created with A
-              //hence in A is printed
-              //in line 23 
-              //the type of reference is still A but obj is now created with B
-              //and hence show() is called inside B now 
-
-
-
-              //Note: all this will work only when inheritance happens
-              //when inheritance is not there
-              //dynamic method dispatch doesnt work
-
-       
-
-              Computer c = new Laptop(); //WE CAN DO THIS
-
-              //In other words we can create a reference of type PARENT and the object of type CHILD
        }
 }
 
-class Computer{
-
+//final class
+final class A{
+       public void show(){
+              System.out.println("In A show");
+       }
+}
+//we dont want any class to inherit A so we use final keyword in A class so that B cannot inherit its features
+class B /*extends A*/{ //extends A will not work
+       public void show(){
+              System.out.println("In B show");
+       }
 }
 
-class Laptop extends Computer{
+//final method
+class C{
+       public final void show(){
+              System.out.println("In C show");
+       }
 
+      
+}
+//this can happen but we dont want to method overriding happening so we can use final keyword for method
+//now show() cannot be used in the child class
+class D extends C{
+       public void show(){ //cannot do this
+              //method overriding stops
+              System.out.println("In D show");
+       }
 }
