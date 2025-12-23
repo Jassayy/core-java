@@ -1,31 +1,23 @@
+//interfaces in java
+//a interface shows what to do but doesnt tell us how to do it
+//it is a blueprint of the class
+
+interface testInterface{
+       void show(); //abstract class
+       //shows what to do
+       //does not show how to do
+}
+
+class Test implements testInterface{
+       public void show(){
+              System.out.println("Shown");
+       }
+}
+
 public class Main {
-
        public static void main(String[] args){
-              A obj = new A();
-              obj.show1(); //only show1 can be accessed cuz A doesnt know what B is
-
-              A obj1 = (A) new B(); //Dynamic method dispatch concept but we are type casting the B object into A object 
-              //this is know as up casting
-              obj1.show1();
-
-              B obj2 = new B(); 
-              //or instead we can do this
-              B obj3 = (B) obj1; //same same 
-              //obj1 refers to type A but we can cast it to type B
-              //this is know as down casting
-              obj2.show2(); //here we can call show2
-              obj3.show2();//works
+              Test t = new Test();
+              t.show();
        }
-}
-
-class A{
-       public void show1(){
-              System.out.println("In show A");
-       }
-}
-
-class B extends A{
-       public void show2(){
-              System.out.println("In show B");
-       }
+       
 }
