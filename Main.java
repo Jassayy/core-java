@@ -1,47 +1,77 @@
-//final keyword -> can be used with variable, methods , classes
+//object class-> class to which every other class extends to 
+//present there by default even if we dont write it
 
 public class Main {
 
-       public static void main(String[] args){
-              int n = 9;
-              n = 10; //we can change the value of n
-              System.out.println(n);
+       public static void main(String[] args) {
+              Laptop obj = new Laptop(1200, "Macbook");
+              // obj.getClass();
+              // obj.hashCode();
+              // obj.toString(); // methods are there even if no method is present in Laptop class
 
-              final int m = 69;
-              // m = 67; //this we cannot do as final keyword is used
-              System.out.println(m);
+              System.out.println(obj); //o/p -> Laptop@2a139a55
+              //by default obj.toString() is called which gives us the abv output
+              // System.out.println(obj.toString()); //this is called abv by default and has the same output which is Laptop@2a139a55
 
-              A obj = new A();
-              obj.show();
+              Laptop obj1 = new Laptop(1200, "Macbook");
+              System.out.println(obj1);
+
+              boolean isObjectSame = obj.equals(obj1);
+
+              System.out.println(isObjectSame); //false 
+              //both objects may have same values but are differnet objects
+
        }
 }
 
-//final class
-final class A{
-       public void show(){
-              System.out.println("In A show");
-       }
-}
-//we dont want any class to inherit A so we use final keyword in A class so that B cannot inherit its features
-class B /*extends A*/{ //extends A will not work
-       public void show(){
-              System.out.println("In B show");
-       }
-}
+class Laptop {
+       // this class extends to Object class by default
+       // even if we dont write it
+       // We dont have any methods defined inside the class
+       // but still we can perform various methods in the main class
+       // have a look abv
 
-//final method
-class C{
-       public final void show(){
-              System.out.println("In C show");
+       private int price;
+       private String model;
+
+       public Laptop(int price, String model) {
+              this.model = model;
+              this.price = price;
        }
 
-      
-}
-//this can happen but we dont want to method overriding happening so we can use final keyword for method
-//now show() cannot be used in the child class
-class D extends C{
-       public void show(){ //cannot do this
-              //method overriding stops
-              System.out.println("In D show");
+       //what if instead of having toString of object class
+       //we define one for this class only
+       public String toString(){
+              return model + " : " + price;
        }
+
+       @Override
+       public int hashCode() {
+              final int prime = 31;
+              int result = 1;
+              result = prime * result + price;
+              result = prime * result + ((model == null) ? 0 : model.hashCode());
+              return result;
+       }
+
+       @Override
+       public boolean equals(Object obj) {
+              if (this == obj)
+                     return true;
+              if (obj == null)
+                     return false;
+              if (getClass() != obj.getClass())
+                     return false;
+              Laptop other = (Laptop) obj;
+              if (price != other.price)
+                     return false;
+              if (model == null) {
+                     if (other.model != null)
+                            return false;
+              } else if (!model.equals(other.model))
+                     return false;
+              return true;
+       }
+
+       
 }
