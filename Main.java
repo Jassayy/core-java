@@ -1,117 +1,33 @@
-interface Vehicle {
-       void changeGear(int a);
+//wrapper classes
+//every primitive data type can be stored directly in stack memory without objects
+//but what if we have a framework that uses only objects
+//we have wrapper classes for overcoming this
+//int -> Integer (wrapper class this is)
+//float -> Float
+//double -> Double and so on
+//these wrapper classes extends to Object class
 
-       void applyBrakes(int a);
-
-       void speedUp(int a);
-       // this interface defines how specific classes should behave
-}
-
-class Cycle implements Vehicle {
-       int speed;
-       int gear;
-
-       public void changeGear(int newGear) {
-              gear = newGear;
-       }
-
-       public void applyBrakes(int dec) {
-              speed = speed - dec;
-       }
-
-       public void speedUp(int inc) {
-              speed = speed + inc;
-       }
-
-       public void printStates() {
-              System.out.println("speed: " + speed + "gear: " + gear);
-       }
-}
-
-class Car implements Vehicle {
-       int speed;
-       int gear;
-
-       public void changeGear(int newGear) {
-              gear = newGear;
-       }
-
-       public void applyBrakes(int dec) {
-              speed = speed - dec;
-       }
-
-       public void speedUp(int inc) {
-              speed = speed + inc;
-       }
-
-       public void printStates() {
-              System.out.println("speed: " + speed + "gear: " + gear);
-       }
-}
-
-
-//multiple inheritance is possible in java with the help of interfaces
-
-interface Add{
-       void add(int a,int b);
-}
-interface Sub{
-       void sub(int a,int b);
-}
-
-//this class inplements both interfaces
-class Calc implements Add, Sub
-{
-       public void add(int a , int b){
-              System.out.println(a+b);
-       }
-
-       public void sub(int a,int b){
-              System.out.println(a-b);
-       }
-}
-
-//interfaces can also define default methods
-interface Display{
-       default void display(){
-              System.out.println("Hello");
-       }
-
-       //can have static methods as well
-       static void display1(){
-              System.out.println("Hello my g");
-       }//can be called using directly the interface name and doesnt need a class
-}
-
-
-public class Main implements Display{
-
+public class Main {
        public static void main(String[] args){
-              Cycle c = new Cycle();
-              c.speedUp(2);
-              c.changeGear(6);
-              c.applyBrakes(3);
+              int n = 9;
+              //with wrapper class
+              Integer n1 = n;
+              //or
+              Integer n2 = new Integer(n); //this syntax is deprecated but we can use 
+              //this concept is known as AUTOBOXING
+              //storing primitive values in the form of object
 
-              System.out.println("cycle state: ");
-              c.printStates();
+              //n1 or n2 will have certain methods in it as well
+              //in order to assign it to a primitive variable again we have the intValue() method
+              int num = n2.intValue(); //this is know as AUTOUNBOXING
+              //IT CAN HAPPEN AUTOMATICALLY AS WELL
+              int num1 = n2; //no need to pass intValue()
+              //this will assign the int value in object to the primitive variable num
 
-              Car b = new Car();
-              b.speedUp(2);
-              b.changeGear(6);
-              b.applyBrakes(3);
-              
-              System.out.println("car state: ");
-              b.printStates();
-
-              Calc x = new Calc();
-              x.add(4, 0);
-              x.sub(4, 5);
-
-              Main m = new Main();
-              m.display(); //interface can implement default methods
-
-              //static method in interface
-              Display.display1();
-
+              //we can convert string to integer as well
+              String str = "123";
+              int s = Integer.parseInt(str);
+              //this will convert the string to int      
+              System.out.println(s+1);
        }
 }
