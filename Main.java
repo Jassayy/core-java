@@ -1,33 +1,44 @@
-//wrapper classes
-//every primitive data type can be stored directly in stack memory without objects
-//but what if we have a framework that uses only objects
-//we have wrapper classes for overcoming this
-//int -> Integer (wrapper class this is)
-//float -> Float
-//double -> Double and so on
-//these wrapper classes extends to Object class
+//inner class
+//an inner class is a class defined inside a class
+//anonymous inner classes
+
+class A{
+       public void show(){
+              System.out.println("In A show");
+       }
+
+       class B{
+              public void config(){
+                     System.out.println("In config");
+              }
+       }
+
+       static class C{
+              public void conf(){
+                     System.out.println("In static C");
+              }
+       }
+}
 
 public class Main {
        public static void main(String[] args){
-              int n = 9;
-              //with wrapper class
-              Integer n1 = n;
-              //or
-              Integer n2 = new Integer(n); //this syntax is deprecated but we can use 
-              //this concept is known as AUTOBOXING
-              //storing primitive values in the form of object
+              A obj = new A();//Here we can implement the A class but what if we want to something different in its implementation
+              //we can define the new class here itself
+              A obj1 = new A(){
+                     public void show(){
+                            System.out.println("In new Show");
+                     }
+              };
 
-              //n1 or n2 will have certain methods in it as well
-              //in order to assign it to a primitive variable again we have the intValue() method
-              int num = n2.intValue(); //this is know as AUTOUNBOXING
-              //IT CAN HAPPEN AUTOMATICALLY AS WELL
-              int num1 = n2; //no need to pass intValue()
-              //this will assign the int value in object to the primitive variable num
+              //this is anonymous inner class of A and does not have a name
+              obj.show(); //in A show prints
+              obj1.show(); //in new show prints
 
-              //we can convert string to integer as well
-              String str = "123";
-              int s = Integer.parseInt(str);
-              //this will convert the string to int      
-              System.out.println(s+1);
+              A.B obj2 = obj.new B(); //this is how we can implement the inner class
+
+              //if the inner class is static we can directly access it with A obj
+
+              A.C obj3 = new A.C(); //class C is static and hence we can direclty implement it without A obj first 
+
        }
 }
