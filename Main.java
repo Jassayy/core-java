@@ -1,44 +1,35 @@
-//inner class
-//an inner class is a class defined inside a class
-//anonymous inner classes
 
-class A{
-       public void show(){
-              System.out.println("In A show");
+//enums
+enum Status {
+       Running("Jas"), Failed("jas"), Success();
+
+       private String s;
+
+       private Status() {
+              System.out.println("In default constructor");
        }
 
-       class B{
-              public void config(){
-                     System.out.println("In config");
-              }
+       // can have constructors here as well
+       private Status(String s) {
+              this.s = s;
+              System.out.println("In parameterised constructor");
        }
 
-       static class C{
-              public void conf(){
-                     System.out.println("In static C");
-              }
-       }
+       // can have setter and getters as well
 }
 
 public class Main {
-       public static void main(String[] args){
-              A obj = new A();//Here we can implement the A class but what if we want to something different in its implementation
-              //we can define the new class here itself
-              A obj1 = new A(){
-                     public void show(){
-                            System.out.println("In new Show");
-                     }
-              };
+       public static void main(String[] args) {
 
-              //this is anonymous inner class of A and does not have a name
-              obj.show(); //in A show prints
-              obj1.show(); //in new show prints
+              Status s = Status.Failed;
 
-              A.B obj2 = obj.new B(); //this is how we can implement the inner class
+              System.out.println(s);
 
-              //if the inner class is static we can directly access it with A obj
+              System.out.println(s.ordinal()); // index of that enum starting from 0
 
-              A.C obj3 = new A.C(); //class C is static and hence we can direclty implement it without A obj first 
+              for (Status s1 : Status.values()) {// this will give the array of enum objects
+                     System.out.println(s1);
 
+              }
        }
 }
