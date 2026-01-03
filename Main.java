@@ -1,35 +1,40 @@
+public class Main {
 
-//enums
-enum Status {
-       Running("Jas"), Failed("jas"), Success();
+       public static void main(String[] args) {
+              int i = 0, j = 0;
+              int[] arr = new int[5];
 
-       private String s;
+              try {
 
-       private Status() {
-              System.out.println("In default constructor");
+                     if (i == 0) {
+                            throw new MyException("Cannot divide by zero - custom exception");
+                     }
+                     j = 18 / i;
+
+                     if (j == 0) {
+                            throw new MyException("This is customised exception");
+                     }
+
+                     System.out.println(arr[5]);
+
+              } catch (MyException e) {
+                     // TODO: handle exception
+                     System.out.println(e); // gives exception
+
+                     // array index out of bounds exception
+                     // arithmetic exceptions
+                     // we can have customized exceptions as well
+              }
+
+              System.out.println("Outside try catch block");
        }
-
-       // can have constructors here as well
-       private Status(String s) {
-              this.s = s;
-              System.out.println("In parameterised constructor");
-       }
-
-       // can have setter and getters as well
 }
 
-public class Main {
-       public static void main(String[] args) {
-
-              Status s = Status.Failed;
-
-              System.out.println(s);
-
-              System.out.println(s.ordinal()); // index of that enum starting from 0
-
-              for (Status s1 : Status.values()) {// this will give the array of enum objects
-                     System.out.println(s1);
-
-              }
+class MyException extends Exception { // we need to extend to exception as it needs to be a subclass of throwable
+       public MyException(String s) {
+              // System.out.println(s); //this doesnt work
+              //to print we need to call constructor of superclass as it is handled by the exception class
+              super(s);
        }
+
 }
