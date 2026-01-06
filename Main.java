@@ -1,51 +1,37 @@
-//threads in java -> the smallest unit of execution within a process that can be scheduled by the operating system
-//runs parallel to each other
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
-//multiple threads
+public class Main {
+       public static void main(String[] args) {
+              List<String> ls = new ArrayList<>();
+              ls.add("jas");
+              ls.add("riya");
+              ls.add("null");
+              Stream<String> stream1 = ls.stream(); // any change in stream1 will not affect the original list
 
-class A extends Thread {
-    public void run() {
-        for (int i = 0; i < 100; i++) {
-            System.out.println("Hi");
-        }
-    }
+              // stream has specific methods
+              stream1.map(s -> s.concat("Hi")).sorted().forEach(System.out::println);
+
+              String s2 = ls.stream().reduce("jas", (c, e) -> c + e); 
+              //reduce combines everything in one value with a starting value 
+              //for the abv ex it is jas
+              //output will be jasjasriyanull
+
+              System.out.println(s2);
+
+              // stream1.forEach(System.out::println);
+
+              // NOTE: a stream can only be used once
+              // so we cant do
+              // stream1.count(); or any other thing with stream1
+              // stream1 is already closed
+
+              // we have methods like
+              // .filter -> can filter based on cond
+              // .map -> can change all values in stream
+              // .sorted -> sorts the elements
+              // .distinct -> remove dups
+              // .skip -> skip first n elements
+       }
 }
-
-class B extends Thread {
-    public void run() {
-        for (int i = 0; i < 100; i++) {
-            System.out.println("Hello");
-        }
-    }
-}
-
-// when we do extends Thread...now they are not normal classes they are threads
-// but still the process executes sequentially
-// for that we use .start() method to start execution of the thread
-
-public class Main
-
-{
-
-    public static void main(String args[])
-
-    {
-        A obj = new A();
-        B obj1 = new B();
-
-        // obj.show();
-        // obj1.show();
-
-        obj.start(); // change show() -> run() as start calls run
-        obj1.start();
-    }
-
-}
-
-//BY DOING THIS
-//these threads run simultaneously but the output is kinda 
-//hi
-//hi
-//hello
-//hello
-//etc etc
