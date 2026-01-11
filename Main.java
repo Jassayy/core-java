@@ -1,37 +1,48 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
+import java.util.*;
+import java.util.stream.*;
+
+class Employee {
+    private String name;
+    private int salary;
+
+    public Employee(String name, int salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+}
 
 public class Main {
-       public static void main(String[] args) {
-              List<String> ls = new ArrayList<>();
-              ls.add("jas");
-              ls.add("riya");
-              ls.add("null");
-              Stream<String> stream1 = ls.stream(); // any change in stream1 will not affect the original list
+    public static void main(String[] args) {
 
-              // stream has specific methods
-              stream1.map(s -> s.concat("Hi")).sorted().forEach(System.out::println);
+        List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee("Amit", 45000));
+        employees.add(new Employee("Neha", 65000));
+        employees.add(new Employee("Ravi", 55000));
+        employees.add(new Employee("Sara", 30000));
 
-              String s2 = ls.stream().reduce("jas", (c, e) -> c + e); 
-              //reduce combines everything in one value with a starting value 
-              //for the abv ex it is jas
-              //output will be jasjasriyanull
+        //  Find highest paid employee
 
-              System.out.println(s2);
+        Stream<Employee> stream = employees.stream();
 
-              // stream1.forEach(System.out::println);
+        Employee result = stream.max(Comparator.comparingInt(Employee::getSalary)).orElse(null);
 
-              // NOTE: a stream can only be used once
-              // so we cant do
-              // stream1.count(); or any other thing with stream1
-              // stream1 is already closed
+        System.out.println(result.getName());
 
-              // we have methods like
-              // .filter -> can filter based on cond
-              // .map -> can change all values in stream
-              // .sorted -> sorts the elements
-              // .distinct -> remove dups
-              // .skip -> skip first n elements
-       }
+        //  Print employees earning >= 50000
+
+        List<Employee> list = employees.stream().filter(e -> e.getSalary() >= 50000).collect(Collectors.toList());
+
+        for (Employee e : list) {
+            System.out.println(e.getName());
+        }
+
+    }
 }
