@@ -1,34 +1,53 @@
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.Period;
 import java.time.temporal.ChronoUnit;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        LocalDate manufacturedDate = LocalDate.of(2026, Month.JANUARY, 24);
+        /*
+         * Dob -> localDate
+         * Check if the person is:
+         * 
+         * "MINOR" (< 18)
+         * 
+         * "ADULT" (18–59)
+         * 
+         * "SENIOR" (60+)
+         * 
+         * calculate age
+         * 
+         */
 
-        System.out.println("Manufactirung Date : " + manufacturedDate);
-        // calculate expiry date
-        // check whether product is expired valid or expiring soon(within 30 days)
-        int expiredPeriodInMonths = 6;
+        LocalDate dob = LocalDate.of(2004, Month.FEBRUARY, 19);
+        // System.out.println(dob.getDayOfWeek());
+        // System.out.println(dob.getDayOfMonth());
 
-        LocalDate expiryDate = manufacturedDate.plusMonths(expiredPeriodInMonths);
+        LocalDate todayDate = LocalDate.now();
 
-        System.out.println("Expiry Date : " + expiryDate);
+        // long numberOfDays = ChronoUnit.DAYS.between(dob, todayDate);
+        long years = ChronoUnit.YEARS.between(dob, todayDate);
+        System.out.println(years);
 
-        if ((LocalDate.now()).isAfter(expiryDate)) {
-            System.out.println("Expired");
-        } else if (ChronoUnit.DAYS.between(LocalDate.now(), expiryDate) <= 30) {
-            System.out.println("Is Expiring soon");
+        if (years < 18) {
+            System.out.println("Minor");
+        } else if (years >= 18 && years < 60) {
+            System.out.println("Adult");
         } else {
-            System.out.println("Valid");
-
+            System.out.println("Senior");
         }
 
-        LocalDate d1 = LocalDate.now();
-        LocalDate d2 = d1.plusDays(7);
+        Period period = Period.between(dob, todayDate);
 
-        System.out.println(ChronoUnit.DAYS.between(d1, d2));
+        int year = period.getYears();
+        System.out.println(year);
+        int month = period.getMonths();
+        System.out.println(month);
+        int days = period.getDays();
+        System.out.println(days);
+
+
     }
 }
