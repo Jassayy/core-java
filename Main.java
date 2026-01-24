@@ -1,53 +1,58 @@
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.Period;
-import java.time.temporal.ChronoUnit;
 
 public class Main {
 
     public static void main(String[] args) {
-
         /*
-         * Dob -> localDate
-         * Check if the person is:
+         * A subscription renews every month on the same day as signup.
          * 
-         * "MINOR" (< 18)
+         * You are given:
          * 
-         * "ADULT" (18–59)
+         * signupDate → LocalDate
          * 
-         * "SENIOR" (60+)
+         * currentDate → LocalDate
          * 
-         * calculate age
+         * Task
          * 
+         * Find the next billing date.
+         * 
+         * Edge cases
+         * 
+         * Signup on 31st
+         * 
+         * February month handling
+         * 
+         * Must use
+         * 
+         * plusMonths()
+         * 
+         * withDayOfMonth()
+         * 
+         * lengthOfMonth()
+         * 
+         * isAfter()
          */
 
-        LocalDate dob = LocalDate.of(2004, Month.FEBRUARY, 19);
-        // System.out.println(dob.getDayOfWeek());
-        // System.out.println(dob.getDayOfMonth());
+        LocalDate signupDate = LocalDate.of(2024, Month.FEBRUARY, 29);
 
-        LocalDate todayDate = LocalDate.now();
+        LocalDate today = LocalDate.of(2026,01,29);
 
-        // long numberOfDays = ChronoUnit.DAYS.between(dob, todayDate);
-        long years = ChronoUnit.YEARS.between(dob, todayDate);
-        System.out.println(years);
+        int billingDay = signupDate.getDayOfMonth();
 
-        if (years < 18) {
-            System.out.println("Minor");
-        } else if (years >= 18 && years < 60) {
-            System.out.println("Adult");
-        } else {
-            System.out.println("Senior");
+        LocalDate candidate = today.withDayOfMonth(
+                Math.min(billingDay, today.lengthOfMonth()));
+
+        // Step 2: if already passed, move to next month
+        if (!candidate.isAfter(today)) {
+            LocalDate nextMonth = today.plusMonths(1);
+            candidate = nextMonth.withDayOfMonth(
+                    Math.min(billingDay, nextMonth.lengthOfMonth()));
         }
 
-        Period period = Period.between(dob, todayDate);
-
-        int year = period.getYears();
-        System.out.println(year);
-        int month = period.getMonths();
-        System.out.println(month);
-        int days = period.getDays();
-        System.out.println(days);
-
+        System.out.println("Signup Date : " + signupDate);
+        System.out.println("Today : " + today);
+        System.out.println("Next Billing : " + candidate);
 
     }
 }
